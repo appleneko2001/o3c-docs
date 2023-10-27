@@ -1,0 +1,557 @@
+<!-- Please use search and find "TODO:" to find which work are required for this mess lmao -->
+<!-- TODO: Download all resources and host them to somewhere reliable hosting service. -->
+<!-- TODO: Correct all redirects to relative path -->
+
+<h1 style="text-align: center"> SayoDevice o3c / o3c++ community documentation </h1>
+
+<!-- Placeholder -->
+<!--
+<center style="font-size: 2em">
+🇺🇸🇷🇺🇨🇳
+</center>
+-->
+
+The place for all information and resources related to the ***SayoDevice o3c*** and ***o3c++*** keypad.
+
+In addition to that, *tips and tricks*. Even *troubleshooting solutions.*
+
+This site is *not* affiliated with any official Sayo personnel.
+
+Start with checking the [*Index*](#index).
+
+Or check [FAQ](#faq) if you have some questions regarding the site.
+
+Have fun!
+<!--
+-> ![wat](https://lerh050.s-ul.eu/8FVXvPJU) <-
+
+<h1> 🇷🇺🇨🇳 Languages 🇷🇺🇨🇳 </h1>
+
+- [English 🇺🇸](https://rentry.org/o3c#index)
+- [Russian 🇷🇺](https://rentry.org/o3cru)
+- [Portuguese 🇧🇷](https://rentry.org/o3cpt)
+
+<br/>
+-->
+
+***
+
+<!-- The table of content -->
+# Index
+
+> Are you a newcomer?
+> Check out Calibration - > Rundown of switch parameters first.
+
+<!-- [TOC] is a table of content (index) module. If you dont see the ToC, then probably you dont have any related module installed or feature enabled for your markdown to html generator -->
+[TOC]
+
+<br/>
+
+***
+
+# <div style="text-align: center"> Input </div>
+
+## <div style="text-align: center"> Calibration </div>
+
+[go back?](#index)
+
+The "calibration" process is just defining the end point of the switch.
+
+You should always do it gently because if you force it too hard, the latches on the switch will bend down and lower the switch, thus giving an incorrect reading.
+
+It is recommended to **recalibrate** your keypad after you changed switches, reflashed / factory reset the firmware, and assembly the keypad.
+
+To calibrate your keypad:
+
+1. **Press** and **Hold** the knob to open the menu.
+2. Scroll the knob down to "Button", and click the knob to open it.
+3. Go to the "Calibration" and open it, and select which key to calibrate for, then proceed.
+4. Gently press down the button, until you feel the switch touching the bottom, then release immediately.
+
+<br/>
+
+***
+
+## <div style="text-align: center"> Rundown of switch parameters </div>
+[Back to the index](#index)
+
+***All*** values are ***RELATIVE*** to the switch's top (0.00mm), and they are built on the assumption that you're using ***4mm travel switches***.
+(might wanna check the [HE switches chart](#he-switches-chart) out)
+
+Click the value to set it. Turn left/right to respectively increase/decrease, each notch you feel is `0.05mm`.
+The limit for all values is `3.95mm`, and the minimum is `0.00mm` (you'll have to turn the knob twice at `0.05mm` to reach it, it's a "special" value.)
+You can always click again to exit the visualiser and see what value you're at in numbers.
+
+### <div style="text-align: center;">Normal Rapid Trigger</div>
+<h4 style="text-align: center;">[Trigger] and [Release]</h4>
+
+Every distance before [Release] is considered a "top deadzone", in that everything that happens there is effectively ignored. *Everything.*
+
+For example,
+
+If my [Release] is `1.00mm` then `0.00mm` -> `0.99mm` is my "top deadzone".
+
+If I try to set my [RT Area] in this "top deadzone" it's ignored as well. (For example [RT Top] `0.10mm` and [RT End] `0.90mm` with both [RT Trigger] and [RT Release] at `0.05mm`, and nothing still happens.)
+
+
+[Trigger] and [Release] constitutes an [Actuation Point], like in normal switches.
+
+[Trigger] should always be bigger than [Release].
+
+When the switch goes through [Trigger], the keypad registers a click and puts it into an "held down" state.
+You may then press down as much as you like, until one of those things happens:
+1. You release back to whatever Release was set to, as that's the absolute release point for whatever's going on.
+2. You're in the [RT Area] and release back to whatever [RT Release] was set to.
+***With this, it's safe to consider that [Release] and [Trigger] are like absolute on/off switches for the entire keypad's operation.***
+
+The distance between both of them denotes how big your [Actuation Point] is, and it should ideally be at least `0.10mm`.
+You can have it as small as `0.05mm`, but that tends to cause accidental and unwanted presses due to sensor chatter.
+
+!!! warning HOWEVER, there's a funny quirk.
+	If your [Actuation Point] is high up and is `0.10mm` or smaller, it can cause random key presses at the top. [see video](https://lerh050.s-ul.eu/NjZ0YjMf)
+	To fix this, extend the distance to `0.15mm` minimum (perhaps even more if it still happens) instead of `0.10mm`. [see video](https://lerh050.s-ul.eu/hCyP9ATj)
+
+For example:
+
+I want a `0.20mm` long [Actuation Point] at `0.30mm`
+
+What I would like to do is:
+
+Set my [Trigger] to `0.30mm` so that the click registers exactly where I want it to be.
+and set my [Release] to `0.10mm` so that it also takes me exactly `0.20mm` to release the key.
+
+
+<h4 style="text-align: center;">[RT Top] and [RT End]</h4>
+<br/>
+
+Both of these constitute the area in which Rapid Trigger is effective, which shall be referred to as [RT Area]
+
+[RT Top] defines the top of [RT Area].
+If you wish to use Rapid Trigger all the time, just set it to equal to your [Trigger].
+Any other value is for advanced usecases (such as only wanting to use rapid trigger for half of the switch, etc...)
+[Continuous Rapid Trigger](#continuous-rapid-trigger) and [Disable Rapid Trigger](#disable-rapid-trigger) also makes special use of this.
+
+[RT End] defines the bottom of [RT Area].
+For most people, the only time you'll ever want to touch this is:
+1. Your fingers are too shaky when holding down sliders, in which case you'll want to reduce it so that you won't accidentally trigger [RT Release]. This creates an "end deadzone" for your shake.
+2. Kinda like above, if you're experiencing sudden key release in general *when bottoming out*, reducing it will often help in most cases.
+3. [Disable Rapid Trigger](#disable-rapid-trigger)
+(the default value is already perfect though, so you'll just be barely ever touching this)
+
+Or if you're some freak who has their own ideas about how their gameplay should be, I dunno.
+
+
+<h4 style="text-align: center;">[RT Trigger] and [RT Release]</h4>
+<br/>
+
+Those two variables take effect only in the [RT Area]. They govern operational sensitivity.
+
+[RT Trigger] controls how far you have to press down for the key to register a click, and transfer into a "held down" state in [RT Area].
+
+[RT Release] controls how far you have to release the key from its "held down" state for it unpress in [RT Area].
+
+As with all other variables, change them according to your OWN preferences and comfort.
+
+!!! The general recommendation is to not use anything lower than `0.20mm` for both of them. Unwanted inputs may occur otherwise.
+
+
+### <div style="text-align: center;">Continuous Rapid Trigger</div>
+<br/>
+
+*This "mode" is activated when you set your [RT Top] to `0.00mm`, and [Trigger] EQUAL to your [RT End]. (for example, `3.95mm` [Trigger] and `3.95mm` [RT End])*
+ (This is also how older firmware versions work.)
+
+In this mode, the keypad basically works like Normal Rapid Trigger without an [Actuation Point].
+
+[Release] becomes the old 1.2 firmware's [Deadzone]. Anything in the [Deadzone] is completely ignored.
+
+You can still use [RT End] and [Trigger] to set a "bottom deadzone". (for example, on `3.70mm` for both the keypad will ignore `0.30mm` at the bottom)
+(if you're looking to copy your old settings then just set it to `3.95mm`, as the old firmwares never really had a bottom deadzone)
+(also, if you're looking to copy your old settings, you can just keep [Press] and [Release] the same as before)
+
+For example:
+
+My old firmware settings were `0.10mm` [Deadzone], `0.20mm` [Press] and `0.25mm` [Release]
+
+To replicate these on the new firmware, I first set my [Release] to `0.10mm`, then [RT Trigger] to `0.20mm` and [RT Release] to `0.25mm`
+
+Then I set my [RT Top] to `0.00mm`, then [Trigger] and [RT End] to `3.95mm` to convert the keypad to Continuous Rapid Trigger.
+
+<br/>
+
+***
+
+### <div style="text-align: center"> Disable Rapid Trigger </div>
+
+[go back?](#index)
+
+<h4 style="text-align: center;">How?</h4>
+
+1. **Calibrate** the switch PROPERLY. Press all the way down gently, until you feel the bottom out.
+
+2. Set [RT Top] and [RT End] both to 0.00mm (do it with [RT Top] first)
+
+3. Your [Actuation Point] is whatever you want in [Trigger], minus how long you want it to be resulting in [Release]
+
+<h4 style="text-align: center;">What</h4>
+
+So I want a `3.2mm` actuation point.
+
+I do step `1`, `2` and set my [Trigger] to `3.20mm` and [Release] to `3.10mm`
+
+<br/>
+
+***
+
+<!--
+***
+
+### Placeholder
+
+***
+
+[go back?](#index)
+
+***
+
+### Placeholder
+
+***
+
+[go back?](#index)
+
+***
+
+### Placeholder
+
+***
+
+[go back?](#index)
+
+***
+-->
+
+<!-- TODO: Rework "Troubleshooting section" -->
+
+[go back?](#index)
+
+# <div style="text-align: center;"> Troubleshooting </div>
+<br/>
+
+## <div style="text-align: center"> Reset the settings </div>
+
+If you did some mistakes on your keypad, and the keypad is not let you revert the changes on the keypad, then you can consider to reset all settings on your keypad.
+
+### <div style="text-align: center"> Factory reset through WebUI </div>
+
+<!--  It requires WebUSB capabilities, which Mozilla rejected to implement such feature due to security issues. -->
+
+!!! warning Some words about supported browsers
+    Not all browsers is supported to use WebUI. Basically, almost all Chromium-based browsers (Google Chrome, Chromium, Microsoft Edge, Opera, etc.) is supported, because those browsers have [WebUSB](https://en.wikipedia.org/wiki/WebUSB) and [WebHID](https://wicg.github.io/webhid/) capabilities, and the WebUI will negotiate your keypad through wired connection with those API. If you use browsers without those APIs support (like IE, Firefox and etc.), then WebUI will unable to reach to your keypad.
+    
+!!! info Additional information for Linux users
+    Before you trying to use WebUI, please confirm that you have added keypads to the udev rules. It is required to let udev allows applications to access your keypad. You can do this easily by running commands at terminal in the below:
+    ```sh
+    sudo wget -P /etc/udev/rules.d https://dl.sayobot.cn/98-saybot.rules
+    sudo udevadm control --reload-rules
+    ```
+    If the WebUI still cannot find your keypad after those changes, you are probably need to restart your browser / computer to make those changes applied.
+
+<!-- 1. Plug in your keypad. If necessary, **holding down the knob** first, then plug in the keypad to the computer. -->
+1. Plug in your keypad. If necessary, plug it in while **holding down the knob**.
+
+2. Go to [sayodevice.com](https://sayodevice.com) and select your device when asked
+<center><img src="/assets/troubleshooting/reset-settings-01.png" alt="Select the connected keypad and click 'connect'"/></center>
+
+3. Go to the `Settings` tab and select the 3 boxes to Open, as shown below
+<center><img src="/assets/troubleshooting/reset-settings-02.png" alt="Enable HID commands debugging menu by open Settings tab, set HID 指令面板 or HID command panel to Open, and then the HID tab will appear."/></center>
+
+4.  Go to the `HID tab`, select the option at the very bottom (that's the factory reset code), then click on the arrow to send it to the device. Also you can use debug code `4F 02 72 96` to confirm factory reset.
+<center><img src="/assets/troubleshooting/reset-settings-03.png" alt="Open The HID tab, click the 恢复出厂 or Restore factory shortcut, then click send button."/></center>
+
+5. Wait 20 seconds approx., then replug the device.
+
+!!! danger Still doesn't work?
+	You might need to perform a hardware factory reset. [Click here!](https://rentry.org/o3c#hardware-factory-reset)
+
+<br/>
+
+***
+
+[go back?](#index)
+## <div style="text-align: center"> Hardware Factory Reset (Hard Reset) </div>
+Somehow the factory reset won't help. You can consider to perform a hard reset to your keypad by "reflash" the firmware. You can also "downgrade" the firmware version of your o3c / o3c++ keypad by following this guide.
+
+!!! warning Additional information for o3c++ users
+	Since the base firmware package in this guide was only built for o3c, o3c++ users have to do extra stuff when upgrading firmware (after doing the hardware recovery and for future updates).
+	The device will be seen as an o3c by the updater and thus be flashed with the incorrect o3c firmware, so to get around this they must:
+
+	1. Delete the "app_o3c.bin" file in the "firmware" folder
+	2. Rename "app_o3c_pp.bin" to "app_o3c.bin"
+	3. That's it. You can run the bat file to upgrade like usual now.
+
+	With this way you can reflash your o3c++ correctly without loss features.
+
+<!--
+
+!!! danger For o3c++ users, there is a little permanent caveat. It's at the end of the guide.
+	If you're feeling bored and your o3c++ still works perfectly and you just want to dick around with this, then DON'T DO IT!!! The effect is NOT reversible!
+    
+    -->
+### Reflash the firmware with WCHISPStudio (Windows OS only)
+
+In this section will use o3c keypad for disassembly / assembly demonstration. o3c++ are almost same.
+
+1. Download [WCHISPStudio](https://www.wch.cn/downloads/file/196.html) and install it.
+2. Download the [base firmware package](https://lerh050.s-ul.eu/3aivec1x).
+3. Open WCHISPStudio and COPY those parameters EXACTLY.
+You can change the language with ![](https://images2.imgbox.com/77/df/lBORKdVV_o.png) on the top bar
+
+<center> <img src="https://images2.imgbox.com/bb/83/LO6Cc1KR_o.png"/> </center>
+<center> <img src="https://images2.imgbox.com/03/83/QqkYIHBv_o.png"/> </center>
+
+<br/>
+
+4. Remove the knob and keycaps off your unit, then screw off the top plate.
+(bro tip: use the plate itself as a screw holder)
+
+<center> <img src="https://images2.imgbox.com/fd/23/FZ7oB7nQ_o.gif"/> </center>
+
+Then get the screen off and hang it on the encoder shaft. You can use something to push it up or just shake it out like below.
+
+<center> <img src="https://images2.imgbox.com/f2/a2/MXWkPy6M_o.gif"/> </center>
+
+<br/>
+
+5. Get anything conductive (metal tweezer, paperclip, etc...) to short the 2 pins under the screen, then plug the unit into your PC *while doing so*.
+
+<center> <img src="https://images2.imgbox.com/b1/ec/OlkdH9Vl_o.gif"/> </center>
+
+<br/>
+
+6. If something like this pops up on WCHISPStudio, you're doing it right.
+
+<center> <img src="https://images2.imgbox.com/84/75/vtrkuoZu_o.png"/> </center>
+
+<br/>
+
+7. Now click <img src="https://images2.imgbox.com/93/f4/AZGkn5Ps_o.png"/>, then unplug the unit and *repeat Step 5*
+
+<br/>
+
+8. Select the base firmware package, tick the box, and click <img src="https://images2.imgbox.com/6b/68/1t3G1Dc7_o.png"/>
+
+<center> <img src="https://images2.imgbox.com/b1/d5/eHG6bZhz_o.png"> </center>
+
+<br/>
+
+9. Once the download procedure is complete, replug your keypad and it should be working now.
+
+<br/>
+
+***
+
+<!-- TODO: article corrections -->
+
+# <div style="text-align: center;"> Display & Importing Media </div>
+<br/>
+
+### <div style="text-align: center"> How media is imported </div>
+[go back?](#index)
+
+<h4 style="text-align: center;">How?</h4>
+
+Aligned to the top left corner, every single piece of media (GIFs are split into and processed frame by frame, then the file size for each frame is added together with no additional compression) goes through the following things:
+
+1. They are first downscaled by the software (very basic and ugly, only bilinar filtering)
+
+2. They're then converted to raw raster data. This could undo most image optimisations.
+
+3. Then they get put through the following algorithm:
+
+-> ![ok](https://images2.imgbox.com/e0/2b/ZiuZoTAt_o.png) <-
+
+This often results in a lower file size, but in rare cases it could be higher as well. This is due to the "converting to raw raster data" process.
+
+
+<h4 style="text-align: center;">What</h4>
+
+Optimise your resolution when importing! This has a MAJOR impact. *For example*, if your GIF has a lot of frames, is square and should only fit to one side then set it to a lower resolution, like so:
+
+-> ![xd](https://images2.imgbox.com/02/0c/9OqD9nfM_o.png) <-
+
+!!! danger Aspect ratios below 1:1 (say, 79:80) WILL break the selector!!! Try to work around that for now.
+
+The processing is consistent and will result in around the same result (quality and file size after compression) all the time no matter how much you optimise your source material.
+
+Despite this, you should still do the downscaling yourself with better algorithms (ImageMagick at [ezgif](https://ezgif.com/resize)). The software sucks ass at scaling (very basic, literally just bilinear filtering and nothing else).
+
+Don't worry too much about source material quality because it'll almost always look like shit all the same in the end! Have fun.
+
+
+<br/>
+
+***
+
+## <div style="text-align: center"> How to import media </div>
+[go back?](#index)
+
+*It is advisable to check out [How media is imported](https://rentry.org/o3c#how-media-is-imported) first.*
+
+<h4 style="text-align: center;">How?</h4>
+
+1. Get the software for your firmware. Could always check out the [downloads](https://rentry.org/o3c/#downloads) section.
+
+2. Plug the keypad in and open the software.
+
+3. Click the Images tab, click the`+` and a box should show up. Click `Open Picture` and select your media.
+
+-> ![just like that](https://images2.imgbox.com/5a/0e/gTzrxTPv_o.png)<-
+
+4. An adjustment box should pop up (it won't if you don't have anymore space), you can play around like below then click `OK` to import.
+
+-> ![Krater needs his sugar.](https://images2.imgbox.com/b4/a9/0kJCLddp_o.gif) <-
+
+!!! danger Aspect ratios below 1:1 (say, 79:80) WILL break the selector!!! Try to work around that for now.
+
+5. Click this box ![yep, this](https://images2.imgbox.com/04/e8/t6VPesCO_o.png) to write the changes to your keypad.
+
+<h4 style="text-align: center;">What</h4>
+
+Due to how janky the editor is, it's recommended to artificially enlarge your canvas for better adjustments.
+‎
+‎
+‎
+-> ![smol](https://images2.imgbox.com/93/65/UtlCNFkn_o.png) gets you ![this](https://images2.imgbox.com/81/06/vdbyx6e0_o.png) <-
+‎
+‎
+‎
+‎
+‎
+-> ![large](https://images2.imgbox.com/32/87/dsX2280t_o.png) gets you ![this](https://images2.imgbox.com/7f/c8/wXXTEa6y_o.png) <-
+
+<br/>
+
+***
+
+# <div style="text-align: center"> Extras </div>
+<br/>
+
+## <div style="text-align: center"> Hall Effect switches chart </div>
+[go back?](#index)
+
+Max raws are grabbed on the **latest o3c firmware version** and **north facing**
+(max raw can be different between the latest o3c and o3c++ firmware versions sometimes, and there's the [South Facing Jank](https://rentry.org/o3c#south-facing-jank))
+
+(Note: you can drag/scroll horizontally the chart around)
+<div style="text-align: center;">
+
+Pic | Name | Mechanism | Start/BottomForce (gf) | Tactile/BottomOut (mm) | Max Raw (approx. range) | Where to get | OEM | Notes |
+:----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+![Linear60 by Wooting](https://images2.imgbox.com/34/50/8UHZVGRH_o.png)|	Lekker Linear60	|	Linear	|	40/60gf	|	None/4mm	|	~800-1400	|	[Wooting's Official Site](https://wooting.io/product/lekker-switch-linear60)|	Gateron	||
+![Linear45 by Wooting](https://images2.imgbox.com/2c/42/TJeSq5mB_o.png)|	Lekker Linear45	|	Linear	|	30/45gf	|	None/4mm	|	~800-1400	|	[Wooting's Official Site](https://wooting.io/product/lekker-switch-linear45)|	Gateron	||
+![Omnipoint by Steelseries](https://images2.imgbox.com/6b/4c/c95wQp3i_o.png)	|	Steelseries Omnipoint	|	Linear	|	30/45gf	|	None/4mm	|	~800-1400	|	[Disassemble](https://steelseries.com/innovation/omnipoint-switches)	|	Gateron|	Scratchy, very loose fit in the o3c, 0/10	|
+![KS-20 White by Gateron](https://images2.imgbox.com/ed/2b/Os8xKgNJ_o.png)	|	Gateron KS-20 White	|	Linear	|	30/50gf	|	None/4mm	|	~800-1400	|	[MechKeyShop](https://mechkeys.com/products/gateron-ks-20-magnetic-hall-sensor-switches)	|	Gateron	||
+![KS-20 Orange by Gateron](https://images2.imgbox.com/de/21/7PVkMNUm_o.png)	|	Gateron KS-20 Orange	|	Linear	|	38/50gf	|	None/4mm	|	~800-1400	|	[MechKeyShop](https://mechkeys.com/products/gateron-ks-20-magnetic-hall-sensor-switches)	|	Gateron	||
+![Random pic lmao](https://images2.imgbox.com/6a/50/4XL6tCE8_o.png)|	Yiqian Reds	|	Linear	|	30/50gf	|	None/4mm	|	~150-800	|	Please don't.	|	[Yiqian](https://detail.1688.com/offer/642498199922.html)	|	🍀	|
+
+</div>
+
+***
+
+## <div style="text-align: center;"> The "South Facing Jank" </div>
+
+[go back?](#index)
+
+The LEDs on the o3c are mounted ***on top of the PCB, and protruding from it.***
+-> ![pic by me, traced by DragonLazer](https://images2.imgbox.com/dd/0c/9Br1CYn9_o.jpg) <-
+
+This causes some rather serious complications on south facing, like this:
+-> ![](https://images2.imgbox.com/a2/a2/f7D3Pysl_o.jpg) <-
+
+This forces at the switch at a weird angle resting on the LED, and thus reduces *max raw*, and makes the entire thing *sound like shit* because the switch is resting on the LED instead of hugging the PCB to make a warm, satisfying sound profile.
+
+Most switches *do not account for this*, and sometimes the ones that do aren't enough.
+-> ![](https://images2.imgbox.com/7e/32/L1ExH87t_o.jpg) <-
+-> ![](https://images2.imgbox.com/2b/a4/bOwPVp4U_o.jpg) <-
+
+Wooting doesn't have this issue because the LEDs on their products are mounted *under the PCB, thus completely leaving the socket flat* accomodating both orientations without any issues.
+-> ![idk who took this](https://images2.imgbox.com/16/98/yxJ059Hm_o.jpg) <-
+
+<br/>
+
+***
+
+## Replacement Parts
+[go back?](#index)
+
+### Knob
+
+The knob uses a generic "EC11 Rotary Encoder", just google it. And make sure you get the correct knob for your encoder's shaft (or the other way around). *You will need a soldering iron to remove it.*
+
+!!! note
+    You will need a basic soldering set (the soldering iron, solder sucker, tin lead (or solder), and some soldering skills, if possible) to remove or replace it easily.
+
+### LCD Screen
+
+Generic 0.96mm *spliced* TFT LCD display, you can bought it from [AliExpress](https://aliexpress.com/i/33008278658.html) (there are cheaper offers out there, just google them)
+*You do not need any equipment to replace it, just lift the clamp to get the cable out. Then push the new cable into the slot nicely and pull the clamp down again.*
+
+<br/>
+
+***
+
+
+# <div style="text-align: center;"> Downloads </div>
+<br/>
+Those are download links directly grabbed from official channels (discord server, site, etc...).
+
+## <div style="text-align: center;"> Firmware & Software </div>
+Flash the firmware by double clicking the `upgrade.bat` file, always.
+
+[go back?](#index)
+
+- ***Firmware Version 1.2*** [**Software**](https://lerh050.s-ul.eu/bM15stkA), [**Firmware**](https://lerh050.s-ul.eu/izRnQsWk)
+
+- ***Firmware Version 1.3*** [**Software**](https://lerh050.s-ul.eu/bM15stkA), [**Firmware**](https://lerh050.s-ul.eu/7JRw4jYS)
+
+<br/>
+
+
+## <div style="text-align: center;"> Other Stuff </div>
+
+[go back?](#index)
+
+- ***Top Plate Template***  [PSD File](https://lerh050.s-ul.eu/7QYd9IvQ)
+You can use this to make your own covers for the top plate. Or make your own top plate out of other materials.
+
+<br/>
+
+***
+
+# <div style="text-align: center;"> FAQ (Frequently asked questions) </div>
+[go back?](#index)
+
+Q: Official discord server ![Clyde](https://images2.imgbox.com/0c/13/2gSYPwNa_o.png)?
+A: [Here](https://discord.gg/GjgSnaZ3Cu). That's the official Sayo Discord. You should know this already unless you didn't read the pamphlet or the link on it has already expired.
+
+Q: Who runs this town?
+A: No one.
+
+Q: Who contributes?
+A: See below.
+
+Q: How do I contribute the documentation?
+A: Everyone can contribute this documentation. Please reach to the GitHub repository and submit a PR (Pull request) to submit your work to review. Also, you can use submit a issue to point out the mistakes in the documentation. The documentation was reworked based on lerh050's o3c rentry page, but its still not perfect to read. If you can do some corrections or expanding the content while in your free time, please do.
+<!--
+A: On [GitHub](https://github.com/lerh050/o3c/). The site is looking for translations, proofreaders, or just DM @lerh050 on Discord if you think whatever else you have can be of reasonable use to the site, really.-->
+
+
+***
+
+<!-- This thing is usable only when its in rentry service. -->
+<!--
+-> [***go back?***](https://rentry.org/o3c#index) ->
+#-> light/dark mode here (click it) ->
+-> ![](https://images2.imgbox.com/c4/9c/zBPLmFQw_o.png) ->
+-->
