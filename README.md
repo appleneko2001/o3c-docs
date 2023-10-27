@@ -1,8 +1,10 @@
-<center><img src="assets/o3c-combined-drawing.svg"></img></center>
+<div align="center">
+  <img src="assets/o3c-combined-drawing.svg"></img>
+</div>
 
-<h1 style="text-align: center"> SayoDevice o3c / o3c++ community documentation </h1>
+<h1 align="center"> SayoDevice o3c / o3c++ community documentation </h1>
 
-## Intro
+## <div align="center">Intro</div>
 The documentation is based on lerh050's o3c[^1] rentry page and the repository[^2], and its under reworking stage. Due to the problems of rentry service, and the project is looking for more contributors, I decided to do this and make it open to everyone to contribute with reviews.
 
 > [!WARNING]
@@ -10,11 +12,11 @@ So far its English available only, but you can join to the translation work to m
 
 <br/>
 
-<center>
-
+<div align="center">
+  
 [Open the docs (EN)](en/docs.md) | [Submit a issue](https://github.com/appleneko2001/o3c-docs/issues/new)
 
-</center>
+</div>
 
 <br/>
 
@@ -22,7 +24,7 @@ So far its English available only, but you can join to the translation work to m
 [^2]: lerh050's o3c GitHub repository https://github.com/lerh050/o3c/
 
 
-## Contributors
+## <div align="center">Contributors</div>
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -34,7 +36,7 @@ So far its English available only, but you can join to the translation work to m
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 
-## License
+## <div align="center">License</div>
 <br/>
 
 All files and embed resources (pictures, videos and etc.) in this repository is licensed under the CC0 v1.0 Universal Public Domain[^3]. [The License file](LICENSE).

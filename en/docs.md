@@ -8,7 +8,7 @@
 <!--
 <center style="font-size: 2em">
 🇺🇸🇷🇺🇨🇳
-</center>
+</div>
 -->
 
 The place for all information and resources related to the ***SayoDevice o3c*** and ***o3c++*** keypad.
@@ -49,9 +49,9 @@ Have fun!
 
 ***
 
-# <div style="text-align: center"> Input </div>
+# <div align="center"> Input </div>
 
-## <div style="text-align: center"> Calibration </div>
+## <div align="center"> Calibration </div>
 
 [go back?](#index)
 
@@ -72,7 +72,7 @@ To calibrate your keypad:
 
 ***
 
-## <div style="text-align: center"> Rundown of switch parameters </div>
+## <div align="center"> Rundown of switch parameters </div>
 [Back to the index](#index)
 
 ***All*** values are ***RELATIVE*** to the switch's top (0.00mm), and they are built on the assumption that you're using ***4mm travel switches***.
@@ -82,8 +82,8 @@ Click the value to set it. Turn left/right to respectively increase/decrease, ea
 The limit for all values is `3.95mm`, and the minimum is `0.00mm` (you'll have to turn the knob twice at `0.05mm` to reach it, it's a "special" value.)
 You can always click again to exit the visualiser and see what value you're at in numbers.
 
-### <div style="text-align: center;">Normal Rapid Trigger</div>
-<h4 style="text-align: center;">[Trigger] and [Release]</h4>
+### <div align="center">Normal Rapid Trigger</div>
+<h4 align="center">[Trigger] and [Release]</h4>
 
 Every distance before [Release] is considered a "top deadzone", in that everything that happens there is effectively ignored. *Everything.*
 
@@ -121,7 +121,7 @@ Set my [Trigger] to `0.30mm` so that the click registers exactly where I want it
 and set my [Release] to `0.10mm` so that it also takes me exactly `0.20mm` to release the key.
 
 
-<h4 style="text-align: center;">[RT Top] and [RT End]</h4>
+<h4 align="center">[RT Top] and [RT End]</h4>
 <br/>
 
 Both of these constitute the area in which Rapid Trigger is effective, which shall be referred to as [RT Area]
@@ -141,7 +141,7 @@ For most people, the only time you'll ever want to touch this is:
 Or if you're some freak who has their own ideas about how their gameplay should be, I dunno.
 
 
-<h4 style="text-align: center;">[RT Trigger] and [RT Release]</h4>
+<h4 align="center">[RT Trigger] and [RT Release]</h4>
 <br/>
 
 Those two variables take effect only in the [RT Area]. They govern operational sensitivity.
@@ -155,7 +155,7 @@ As with all other variables, change them according to your OWN preferences and c
 !!! The general recommendation is to not use anything lower than `0.20mm` for both of them. Unwanted inputs may occur otherwise.
 
 
-### <div style="text-align: center;">Continuous Rapid Trigger</div>
+### <div align="center">Continuous Rapid Trigger</div>
 <br/>
 
 *This "mode" is activated when you set your [RT Top] to `0.00mm`, and [Trigger] EQUAL to your [RT End]. (for example, `3.95mm` [Trigger] and `3.95mm` [RT End])*
@@ -181,11 +181,11 @@ Then I set my [RT Top] to `0.00mm`, then [Trigger] and [RT End] to `3.95mm` to c
 
 ***
 
-### <div style="text-align: center"> Disable Rapid Trigger </div>
+### <div align="center"> Disable Rapid Trigger </div>
 
 [go back?](#index)
 
-<h4 style="text-align: center;">How?</h4>
+<h4 align="center">How?</h4>
 
 1. **Calibrate** the switch PROPERLY. Press all the way down gently, until you feel the bottom out.
 
@@ -193,7 +193,7 @@ Then I set my [RT Top] to `0.00mm`, then [Trigger] and [RT End] to `3.95mm` to c
 
 3. Your [Actuation Point] is whatever you want in [Trigger], minus how long you want it to be resulting in [Release]
 
-<h4 style="text-align: center;">What</h4>
+<h4 align="center">What</h4>
 
 So I want a `3.2mm` actuation point.
 
@@ -235,14 +235,14 @@ I do step `1`, `2` and set my [Trigger] to `3.20mm` and [Release] to `3.10mm`
 
 [go back?](#index)
 
-# <div style="text-align: center;"> Troubleshooting </div>
+# <div align="center"> Troubleshooting </div>
 <br/>
 
-## <div style="text-align: center"> Reset the settings </div>
+## <div align="center"> Reset the settings </div>
 
 If you did some mistakes on your keypad, and the keypad is not let you revert the changes on the keypad, then you can consider to reset all settings on your keypad.
 
-### <div style="text-align: center"> Factory reset through WebUI </div>
+### <div align="center"> Factory reset through WebUI </div>
 
 <!--  It requires WebUSB capabilities, which Mozilla rejected to implement such feature due to security issues. -->
 
@@ -261,13 +261,13 @@ If you did some mistakes on your keypad, and the keypad is not let you revert th
 1. Plug in your keypad. If necessary, plug it in while **holding down the knob**.
 
 2. Go to [sayodevice.com](https://sayodevice.com) and select your device when asked
-<center><img src="/assets/troubleshooting/reset-settings-01.png" alt="Select the connected keypad and click 'connect'"/></center>
+<div align="center"><img src="/assets/troubleshooting/reset-settings-01.png" alt="Select the connected keypad and click 'connect'"/></div>
 
 3. Go to the `Settings` tab and select the 3 boxes to Open, as shown below
-<center><img src="/assets/troubleshooting/reset-settings-02.png" alt="Enable HID commands debugging menu by open Settings tab, set HID 指令面板 or HID command panel to Open, and then the HID tab will appear."/></center>
+<div align="center"><img src="/assets/troubleshooting/reset-settings-02.png" alt="Enable HID commands debugging menu by open Settings tab, set HID 指令面板 or HID command panel to Open, and then the HID tab will appear."/></div>
 
 4.  Go to the `HID tab`, select the option at the very bottom (that's the factory reset code), then click on the arrow to send it to the device. Also you can use debug code `4F 02 72 96` to confirm factory reset.
-<center><img src="/assets/troubleshooting/reset-settings-03.png" alt="Open The HID tab, click the 恢复出厂 or Restore factory shortcut, then click send button."/></center>
+<div align="center"><img src="/assets/troubleshooting/reset-settings-03.png" alt="Open The HID tab, click the 恢复出厂 or Restore factory shortcut, then click send button."/></div>
 
 5. Wait 20 seconds approx., then replug the device.
 
@@ -279,7 +279,7 @@ If you did some mistakes on your keypad, and the keypad is not let you revert th
 ***
 
 [go back?](#index)
-## <div style="text-align: center"> Hardware Factory Reset (Hard Reset) </div>
+## <div align="center"> Hardware Factory Reset (Hard Reset) </div>
 Somehow the factory reset won't help. You can consider to perform a hard reset to your keypad by "reflash" the firmware. You can also "downgrade" the firmware version of your o3c / o3c++ keypad by following this guide.
 
 !!! warning Additional information for o3c++ users
@@ -307,31 +307,31 @@ In this section will use o3c keypad for disassembly / assembly demonstration. o3
 3. Open WCHISPStudio and COPY those parameters EXACTLY.
 You can change the language with ![](https://images2.imgbox.com/77/df/lBORKdVV_o.png) on the top bar
 
-<center> <img src="https://images2.imgbox.com/bb/83/LO6Cc1KR_o.png"/> </center>
-<center> <img src="https://images2.imgbox.com/03/83/QqkYIHBv_o.png"/> </center>
+<div align="center"> <img src="https://images2.imgbox.com/bb/83/LO6Cc1KR_o.png"/> </div>
+<div align="center"> <img src="https://images2.imgbox.com/03/83/QqkYIHBv_o.png"/> </div>
 
 <br/>
 
 4. Remove the knob and keycaps off your unit, then screw off the top plate.
 (bro tip: use the plate itself as a screw holder)
 
-<center> <img src="https://images2.imgbox.com/fd/23/FZ7oB7nQ_o.gif"/> </center>
+<div align="center"> <img src="https://images2.imgbox.com/fd/23/FZ7oB7nQ_o.gif"/> </div>
 
 Then get the screen off and hang it on the encoder shaft. You can use something to push it up or just shake it out like below.
 
-<center> <img src="https://images2.imgbox.com/f2/a2/MXWkPy6M_o.gif"/> </center>
+<div align="center"> <img src="https://images2.imgbox.com/f2/a2/MXWkPy6M_o.gif"/> </div>
 
 <br/>
 
 5. Get anything conductive (metal tweezer, paperclip, etc...) to short the 2 pins under the screen, then plug the unit into your PC *while doing so*.
 
-<center> <img src="https://images2.imgbox.com/b1/ec/OlkdH9Vl_o.gif"/> </center>
+<div align="center"> <img src="https://images2.imgbox.com/b1/ec/OlkdH9Vl_o.gif"/> </div>
 
 <br/>
 
 6. If something like this pops up on WCHISPStudio, you're doing it right.
 
-<center> <img src="https://images2.imgbox.com/84/75/vtrkuoZu_o.png"/> </center>
+<div align="center"> <img src="https://images2.imgbox.com/84/75/vtrkuoZu_o.png"/> </div>
 
 <br/>
 
@@ -341,7 +341,7 @@ Then get the screen off and hang it on the encoder shaft. You can use something 
 
 8. Select the base firmware package, tick the box, and click <img src="https://images2.imgbox.com/6b/68/1t3G1Dc7_o.png"/>
 
-<center> <img src="https://images2.imgbox.com/b1/d5/eHG6bZhz_o.png"> </center>
+<div align="center"> <img src="https://images2.imgbox.com/b1/d5/eHG6bZhz_o.png"> </div>
 
 <br/>
 
@@ -353,13 +353,13 @@ Then get the screen off and hang it on the encoder shaft. You can use something 
 
 <!-- TODO: article corrections -->
 
-# <div style="text-align: center;"> Display & Importing Media </div>
+# <div align="center"> Display & Importing Media </div>
 <br/>
 
-### <div style="text-align: center"> How media is imported </div>
+### <div align="center"> How media is imported </div>
 [go back?](#index)
 
-<h4 style="text-align: center;">How?</h4>
+<h4 align="center">How?</h4>
 
 Aligned to the top left corner, every single piece of media (GIFs are split into and processed frame by frame, then the file size for each frame is added together with no additional compression) goes through the following things:
 
@@ -374,7 +374,7 @@ Aligned to the top left corner, every single piece of media (GIFs are split into
 This often results in a lower file size, but in rare cases it could be higher as well. This is due to the "converting to raw raster data" process.
 
 
-<h4 style="text-align: center;">What</h4>
+<h4 align="center">What</h4>
 
 Optimise your resolution when importing! This has a MAJOR impact. *For example*, if your GIF has a lot of frames, is square and should only fit to one side then set it to a lower resolution, like so:
 
@@ -393,12 +393,12 @@ Don't worry too much about source material quality because it'll almost always l
 
 ***
 
-## <div style="text-align: center"> How to import media </div>
+## <div align="center"> How to import media </div>
 [go back?](#index)
 
 *It is advisable to check out [How media is imported](https://rentry.org/o3c#how-media-is-imported) first.*
 
-<h4 style="text-align: center;">How?</h4>
+<h4 align="center">How?</h4>
 
 1. Get the software for your firmware. Could always check out the [downloads](https://rentry.org/o3c/#downloads) section.
 
@@ -416,7 +416,7 @@ Don't worry too much about source material quality because it'll almost always l
 
 5. Click this box ![yep, this](https://images2.imgbox.com/04/e8/t6VPesCO_o.png) to write the changes to your keypad.
 
-<h4 style="text-align: center;">What</h4>
+<h4 align="center">What</h4>
 
 Due to how janky the editor is, it's recommended to artificially enlarge your canvas for better adjustments.
 ‎
@@ -434,17 +434,17 @@ Due to how janky the editor is, it's recommended to artificially enlarge your ca
 
 ***
 
-# <div style="text-align: center"> Extras </div>
+# <div align="center"> Extras </div>
 <br/>
 
-## <div style="text-align: center"> Hall Effect switches chart </div>
+## <div align="center"> Hall Effect switches chart </div>
 [go back?](#index)
 
 Max raws are grabbed on the **latest o3c firmware version** and **north facing**
 (max raw can be different between the latest o3c and o3c++ firmware versions sometimes, and there's the [South Facing Jank](https://rentry.org/o3c#south-facing-jank))
 
 (Note: you can drag/scroll horizontally the chart around)
-<div style="text-align: center;">
+<div align="center">
 
 Pic | Name | Mechanism | Start/BottomForce (gf) | Tactile/BottomOut (mm) | Max Raw (approx. range) | Where to get | OEM | Notes |
 :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
@@ -459,7 +459,7 @@ Pic | Name | Mechanism | Start/BottomForce (gf) | Tactile/BottomOut (mm) | Max R
 
 ***
 
-## <div style="text-align: center;"> The "South Facing Jank" </div>
+## <div align="center"> The "South Facing Jank" </div>
 
 [go back?](#index)
 
@@ -502,11 +502,11 @@ Generic 0.96mm *spliced* TFT LCD display, you can bought it from [AliExpress](ht
 ***
 
 
-# <div style="text-align: center;"> Downloads </div>
+# <div align="center"> Downloads </div>
 <br/>
 Those are download links directly grabbed from official channels (discord server, site, etc...).
 
-## <div style="text-align: center;"> Firmware & Software </div>
+## <div align="center"> Firmware & Software </div>
 Flash the firmware by double clicking the `upgrade.bat` file, always.
 
 [go back?](#index)
@@ -518,7 +518,7 @@ Flash the firmware by double clicking the `upgrade.bat` file, always.
 <br/>
 
 
-## <div style="text-align: center;"> Other Stuff </div>
+## <div align="center"> Other Stuff </div>
 
 [go back?](#index)
 
@@ -529,7 +529,7 @@ You can use this to make your own covers for the top plate. Or make your own top
 
 ***
 
-# <div style="text-align: center;"> FAQ (Frequently asked questions) </div>
+# <div align="center"> FAQ (Frequently asked questions) </div>
 [go back?](#index)
 
 Q: Official discord server ![Clyde](https://images2.imgbox.com/0c/13/2gSYPwNa_o.png)?
