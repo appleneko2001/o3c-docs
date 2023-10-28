@@ -107,9 +107,10 @@ You may then press down as much as you like, until one of those things happens:
 The distance between both of them denotes how big your [Actuation Point] is, and it should ideally be at least `0.10mm`.
 You can have it as small as `0.05mm`, but that tends to cause accidental and unwanted presses due to sensor chatter.
 
-!!! warning HOWEVER, there's a funny quirk.
-	If your [Actuation Point] is high up and is `0.10mm` or smaller, it can cause random key presses at the top. [see video](https://lerh050.s-ul.eu/NjZ0YjMf)
-	To fix this, extend the distance to `0.15mm` minimum (perhaps even more if it still happens) instead of `0.10mm`. [see video](https://lerh050.s-ul.eu/hCyP9ATj)
+<!-- HOWEVER, there's a funny quirk. -->
+> [!WARNING]
+> If your [Actuation Point] is high up and is `0.10mm` or smaller, it can cause random key presses at the top. [see video](https://lerh050.s-ul.eu/NjZ0YjMf)
+> To fix this, extend the distance to `0.15mm` minimum (perhaps even more if it still happens) instead of `0.10mm`. [see video](https://lerh050.s-ul.eu/hCyP9ATj)
 
 For example:
 
@@ -152,7 +153,8 @@ Those two variables take effect only in the [RT Area]. They govern operational s
 
 As with all other variables, change them according to your OWN preferences and comfort.
 
-!!! The general recommendation is to not use anything lower than `0.20mm` for both of them. Unwanted inputs may occur otherwise.
+> [!NOTE]
+> The general recommendation is to not use anything lower than `0.20mm` for both of them. Unwanted inputs may occur otherwise.
 
 
 ### <div align="center">Continuous Rapid Trigger</div>
@@ -246,16 +248,19 @@ If you did some mistakes on your keypad, and the keypad is not let you revert th
 
 <!--  It requires WebUSB capabilities, which Mozilla rejected to implement such feature due to security issues. -->
 
-!!! warning Some words about supported browsers
-    Not all browsers is supported to use WebUI. Basically, almost all Chromium-based browsers (Google Chrome, Chromium, Microsoft Edge, Opera, etc.) is supported, because those browsers have [WebUSB](https://en.wikipedia.org/wiki/WebUSB) and [WebHID](https://wicg.github.io/webhid/) capabilities, and the WebUI will negotiate your keypad through wired connection with those API. If you use browsers without those APIs support (like IE, Firefox and etc.), then WebUI will unable to reach to your keypad.
-    
-!!! info Additional information for Linux users
-    Before you trying to use WebUI, please confirm that you have added keypads to the udev rules. It is required to let udev allows applications to access your keypad. You can do this easily by running commands at terminal in the below:
-    ```sh
-    sudo wget -P /etc/udev/rules.d https://dl.sayobot.cn/98-saybot.rules
-    sudo udevadm control --reload-rules
-    ```
-    If the WebUI still cannot find your keypad after those changes, you are probably need to restart your browser / computer to make those changes applied.
+> [!WARNING]
+> Not all browsers is supported to use WebUI. Basically, almost all Chromium-based browsers (Google Chrome, Chromium, Microsoft Edge, Opera, etc.) is supported, because those browsers have [WebUSB](https://en.wikipedia.org/wiki/WebUSB) and [WebHID](https://wicg.github.io/webhid/) capabilities, and the WebUI will negotiate your keypad through wired connection with those API. If you use browsers without those APIs support (like IE, Firefox and etc.), then WebUI will unable to reach to your keypad.
+
+> [!IMPORTANT]
+> Additional information for Linux users
+>
+> Before you trying to use WebUI, please confirm that you have added keypads to the udev rules. It is required to let udev allows the WebUI to access your keypad. You can do this easily by running commands at terminal in the below:
+>  ```sh
+>  sudo wget -P /etc/udev/rules.d https://dl.sayobot.cn/98-saybot.rules
+>  sudo udevadm control --reload-rules
+>  ```
+>  If the WebUI still cannot find your keypad after those changes, you are probably need to restart your browser / computer to make those changes applied.
+
 
 <!-- 1. Plug in your keypad. If necessary, **holding down the knob** first, then plug in the keypad to the computer. -->
 1. Plug in your keypad. If necessary, plug it in while **holding down the knob**.
@@ -271,8 +276,9 @@ If you did some mistakes on your keypad, and the keypad is not let you revert th
 
 5. Wait 20 seconds approx., then replug the device.
 
-!!! danger Still doesn't work?
-	You might need to perform a hardware factory reset. [Click here!](https://rentry.org/o3c#hardware-factory-reset)
+> [!WARNING]
+> Still doesn't work?
+> You might need to perform a hardware factory reset. [Click here!](https://rentry.org/o3c#hardware-factory-reset)
 
 <br/>
 
@@ -282,15 +288,17 @@ If you did some mistakes on your keypad, and the keypad is not let you revert th
 ## <div align="center"> Hardware Factory Reset (Hard Reset) </div>
 Somehow the factory reset won't help. You can consider to perform a hard reset to your keypad by "reflash" the firmware. You can also "downgrade" the firmware version of your o3c / o3c++ keypad by following this guide.
 
-!!! warning Additional information for o3c++ users
-	Since the base firmware package in this guide was only built for o3c, o3c++ users have to do extra stuff when upgrading firmware (after doing the hardware recovery and for future updates).
-	The device will be seen as an o3c by the updater and thus be flashed with the incorrect o3c firmware, so to get around this they must:
 
-	1. Delete the "app_o3c.bin" file in the "firmware" folder
-	2. Rename "app_o3c_pp.bin" to "app_o3c.bin"
-	3. That's it. You can run the bat file to upgrade like usual now.
-
-	With this way you can reflash your o3c++ correctly without loss features.
+> [!IMPORTANT]
+> Additional information for o3c++ users
+>
+>	Since the base firmware package in this guide was only built for o3c, o3c++ users have to do extra stuff when upgrading firmware (after doing the hardware recovery and for future updates).
+>	The device will be seen as an o3c by the updater and thus be flashed with the incorrect o3c firmware, so to get around this they must:
+>	1. Delete the "app_o3c.bin" file in the "firmware" folder
+>	2. Rename "app_o3c_pp.bin" to "app_o3c.bin"
+>	3. That's it. You can run the bat file to upgrade like usual now.
+>
+>	With this way you can reflash your o3c++ correctly without loss features.
 
 <!--
 
@@ -380,7 +388,8 @@ Optimise your resolution when importing! This has a MAJOR impact. *For example*,
 
 -> ![xd](https://images2.imgbox.com/02/0c/9OqD9nfM_o.png) <-
 
-!!! danger Aspect ratios below 1:1 (say, 79:80) WILL break the selector!!! Try to work around that for now.
+> [!warning]
+> Aspect ratios below 1:1 (for example, 79:80) WILL break the selector!!! Try to work around that for now.
 
 The processing is consistent and will result in around the same result (quality and file size after compression) all the time no matter how much you optimise your source material.
 
@@ -412,22 +421,19 @@ Don't worry too much about source material quality because it'll almost always l
 
 -> ![Krater needs his sugar.](https://images2.imgbox.com/b4/a9/0kJCLddp_o.gif) <-
 
-!!! danger Aspect ratios below 1:1 (say, 79:80) WILL break the selector!!! Try to work around that for now.
+> [!warning]
+> Aspect ratios below 1:1 (for example, 79:80) WILL break the selector!!! Try to work around that for now.
 
 5. Click this box ![yep, this](https://images2.imgbox.com/04/e8/t6VPesCO_o.png) to write the changes to your keypad.
 
 <h4 align="center">What</h4>
 
 Due to how janky the editor is, it's recommended to artificially enlarge your canvas for better adjustments.
-‎
-‎
-‎
+
+
 -> ![smol](https://images2.imgbox.com/93/65/UtlCNFkn_o.png) gets you ![this](https://images2.imgbox.com/81/06/vdbyx6e0_o.png) <-
-‎
-‎
-‎
-‎
-‎
+
+
 -> ![large](https://images2.imgbox.com/32/87/dsX2280t_o.png) gets you ![this](https://images2.imgbox.com/7f/c8/wXXTEa6y_o.png) <-
 
 <br/>
@@ -489,8 +495,8 @@ Wooting doesn't have this issue because the LEDs on their products are mounted *
 
 The knob uses a generic "EC11 Rotary Encoder", just google it. And make sure you get the correct knob for your encoder's shaft (or the other way around). *You will need a soldering iron to remove it.*
 
-!!! note
-    You will need a basic soldering set (the soldering iron, solder sucker, tin lead (or solder), and some soldering skills, if possible) to remove or replace it easily.
+> [!important]
+>You will need a basic soldering set (the soldering iron, solder sucker, tin lead (or solder), and some soldering skills, if possible) to remove or replace it easily.
 
 ### LCD Screen
 
